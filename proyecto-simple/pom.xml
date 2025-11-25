@@ -8,3 +8,5 @@
         <maven.compiler.release>25</maven.compiler.release>
     </properties>
 </project>
+
+echo "Proyecto '$PROJECT_NAME' creado en: $CURRENT_DIR"
