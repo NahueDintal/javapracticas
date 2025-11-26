@@ -1,12 +1,63 @@
 public class Main {
   public static void main(String[] args) {
+    Libro libro1 = new Libro("Ejemplo", "Autor", 2024);
+    libro1.devolver();
+  }
+}
 
-    Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", 1967);
-    Libro libro2 = new Libro("1984", "George Orwell", 1949);
-    Libro libro3 = new Libro("El Quijote", "Miguel de Cervantes", 1605);
+class Libro {
+  private String titulo;
+  private String autor;
+  private int fechapublicacion;
+  private boolean disponibilidad;
 
-    libro1.mostrarInfo();
-    libro2.mostrarInfo();
-    libro3.mostrarInfo();
+  public Libro(String titulo, String autor, int fechapublicacion) {
+    this.titulo = titulo;
+    this.autor = autor;
+    this.fechapublicacion = fechapublicacion;
+    this.disponibilidad = true;
+  }
+
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public String getAutor() {
+    return autor;
+  }
+
+  public int getfechapublicacion() {
+    return fechapublicacion;
+  }
+
+  public boolean isDisponible() {
+    return disponibilidad;
+  }
+
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
+  }
+
+  public void prestar() {
+    if (disponibilidad) {
+      disponibilidad = false;
+      System.out.println("Libro '" + titulo + "' prestado.");
+    } else {
+      System.out.println("Libro '" + titulo + "' no está disponible.");
+    }
+  }
+
+  public void devolver() {
+    disponibilidad = true;
+    System.out.println("Libro '" + titulo + "'devuelto exitosamente.");
+  }
+
+  public void mostrarInfo() {
+    String estado = disponibilidad ? "Disponible" : "Prestado";
+    System.out.println("Título: " + titulo);
+    System.out.println("Autor: " + autor);
+    System.out.println("Año: " + fechapublicacion);
+    System.out.println("Estado: " + estado);
+    System.out.println("----------------------");
   }
 }
