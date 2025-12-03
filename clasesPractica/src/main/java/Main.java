@@ -5,11 +5,11 @@ public class Main {
     Scanner scanner = new Scanner(System.in);
 
     // Crear objetos de diferentes tipos
-    Candado candado1 = new Candado(001, "Master Lock", "Acero", 25.50, 10, "combinacion", 1, true);
+    Candado candado1 = new Candado(001, "Master Lock", "Acero", 25.50, 10, 50, 1, true);
 
-    Llave llave1 = new Llave(002, "Yale", "Bronce", 5.75, 50, "original", "EURO", 60);
+    Llave llave1 = new Llave(002, "Yale", "Bronce", 5.75, 50, "original", "EURO");
 
-    Cerradura cerradura1 = new Cerradura(004, "ABUS", "Zinc", 45.80, 5, "embutir", "Plateado", true);
+    Cerradura cerradura1 = new Cerradura(004, "ABUS", "Zinc", 45.80, 5, "embutir", 15);
 
     int opcion;
 
