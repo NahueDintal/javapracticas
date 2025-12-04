@@ -1,9 +1,13 @@
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.nio.file.Files;
+import java.nio.file.*;
+import java.io.IOException;
 
 public class Main {
-  public static void main(String[] args) {
+  public static void Interface() {
 
     if (args.length == 0 || args[0] == "-h" || args[0] == "--help") {
       imprimirAyuda();
@@ -17,50 +21,111 @@ public class Main {
     String MensjUso = "Uso: tasker <COMANDO> ";
     String comando = args[0].toLowerCase();
 
-    switch (comando)
-    {
-      case "init": InicializarTasker(directorioTareas); break;
+    switch (comando) {
+      case "init":
+        inicializarTasker(directorioTareas);
+        break;
       case "add":
       case "a":
       case "new":
-        AgregarTarea(args, directorioTareas, archivoTareas); break;
+        agregarTarea(args, directorioTareas, archivoTareas);
+        break;
       case "list":
-      case "ls": ListarTareas(archivoTareas); break;
+      case "ls":
+        ListarTareas(archivoTareas);
+        break;
       case "delete":
       case "del":
       case "rm":
-        if (args.Length < 2)
-        {
+        if (args.Length < 2) {
           System.out.println(MensjErrorId);
           System.out.println(MensjUso);
           return;
         }
-        EliminarTarea(args[1], archivoTareas); break;
-      case "status": MostrarEstado(directorioTareas, archivoTareas); break;
+        eliminarTarea(args[1], archivoTareas);
+        break;
+      case "status":
+        mostrarEstado(directorioTareas, archivoTareas);
+        break;
       case "ok":
       case "c":
       case "complete":
-        if (args.Length < 2)
-        {
+        if (args.Length < 2) {
           System.out.println(MensjErrorId);
           System.out.println(MensjUso);
           return;
         }
-        CompletarTarea(args[1], archivoTareas); break;
+        completarTarea(args[1], archivoTareas);
+        break;
       default:
-        System.out.println($"Comando no reconocido: {comando}");
+        System.out.println("Comando no reconocido: " + comando);
         imprimirAyuda();
         break;
     }
   }
 
-  public static void InicializarTasker(String directorioTareas) {
-    if (!Files.exists(directorioTareas)) {
-      Files.createDirectory(directorioTareas);
-      System.out.println("Tasker inicializado en: " + directorioTareas);
-      System.out.println("Ahora puedes agregar tareas específicas de este proyecto.");
-    } else {
-      System.out.println("Tasker ya está inicializado en este directorio.");
+  public static void inicializarTasker(String directorioTareas) {
+    Path path = Paths.get(directorioTareas);
+    try {
+      if (!Files.exists(path)) {
+        Files.createDirectory(path);
+        System.out.println("Tasker inicializado en: " + directorioTareas);
+        System.out.println("Ahora puedes agregar tareas específicas de este proyecto.");
+      } else {
+        System.out.println("Tasker ya está inicializado en este directorio.");
+      }
+    } catch (IOException e) {
+      System.err.println("Error al iniciar tasker: " + e.getMessage());
+    } catch (InvalidPathException e) {
+      System.err.println("La ruta del directorio es inválida: " + directorioTareas);
+    }
+  }
+
+  static void AgregarTarea(String[] args, String directorioTareas, String archivoTareas) {
+    Path dirpath = Paths.get(directorioTareas);
+    Path filepath = Paths.get(archivoTareas);
+    if (!Files.exists(dirpath)) {
+      System.out.println("Tasker no está inicializado en este directorio.");
+      System.out.println("Ejecuta primero: tasker init");
+      return;
+    }
+    if (!Files.exists(filepath)) {
+      Files.createFile(filepath);
+      System.out.println("Archivo de tareas creado" + archivoTareas);
+    }
+
+    String nombre = null;
+    String fecha = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/mm/yyyy"));
+    String descripcion = "Sin descripción";
+    String tipo = "Sin tipo";
+    String prioridad = "media";
+
+    for (int i = 1; i < args.length; i++) {
+      switch (args[i]) {
+        case "-n":
+          if (i + 1 < args.length)
+            nombre = args[++i];
+          break;
+        case "-f":
+          if (i + 1 < args.length)
+            fecha = args[++i];
+          break;
+        case "-d":
+          if (i + 1 < args.length)
+            descripcion = args[++i];
+          break;
+        case "-t":
+          if (i + 1 < args.length)
+            tipo = args[++i];
+          break;
+        case "-p":
+          if (i + 1 < args.length)
+            prioridad = args[++i];
+          break;
+        default:
+          System.out.println("Opción desconocida: " + args);
+          break;
+      }
     }
   }
 
