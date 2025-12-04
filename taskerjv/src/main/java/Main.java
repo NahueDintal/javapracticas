@@ -2,6 +2,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.nio.file.Files;
 import java.nio.file.*;
 import java.io.IOException;
@@ -107,8 +108,16 @@ public class Main {
             nombre = args[++i];
           break;
         case "-f":
-          if (i + 1 < args.length)
-            fecha = args[++i];
+          if (i + 1 < args.length) {
+            String fechaInput = args[++i];
+            try {
+              LocalDate.parse(fechaInput, DateTimeFormatter.ofPattern("dd/mm/yyyy"));
+              fecha = fechaInput;
+            } catch (DateTimeParseException e) {
+              System.err.println("Formato de fecha inválido.");
+              System.err.println("Esperando formato dd/mm/yyyy");
+            }
+          }
           break;
         case "-d":
           if (i + 1 < args.length)
@@ -119,12 +128,19 @@ public class Main {
             tipo = args[++i];
           break;
         case "-p":
-          if (i + 1 < args.length)
-            prioridad = args[++i];
+          if (i + 1 < args.length) {
+            prioridad = args[++i].toLowerCase();
+            if (p.equals("alta") || p.equals("media") || p.equals("alta")) {
+              prioridad = p;
+            } else {
+              System.err.println("Prioridad inválida, usando 'media'.");
+              System.err.println("Opciones válidas: alta, media, baja");
+            }
+          }
           break;
         default:
           System.out.println("Opción desconocida: " + args);
-          break;
+          return;
       }
     }
   }
