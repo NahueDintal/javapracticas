@@ -145,6 +145,33 @@ public class Main {
     }
   }
 
+  static void listarTareas(String archivoTareas)
+  {
+    if (!File.exists(archivoTareas))
+    {
+      System.out.println($"No hay tareas guardadas en este proyecto ({Path.GetFileName(Environment.CurrentDirectory)})");
+      System.out.println("Para empezar: tasker init && tasker add -n \"Mi primera tarea\"");
+      return;
+    }
+
+    System.out.println($"Tareas del proyecto: {Path.GetFileName(Environment.CurrentDirectory)}");
+    System.out.println(new string('-', 50));
+
+    foreach (string linea in File.ReadAllLines(archivoTareas))
+    {
+      String[] partes = linea.Split('|');
+      String estado = partes.Length >= 7 ? partes[6] : "pendiente";
+      String indicadorEstado = estado == "completada" ? "✅" : "⭕";
+      if (partes.length >= 6)
+      {
+        // Mostrar con indicador de estado
+        System.out.println(indicadorEstado + partes[0],3 + partes[1]);
+        System.out.println("Fecha: " + partes[2] +" | Tipo: "+ partes[4] +" | Prioridad: "+ partes[5] +"| Estado: "+ estado");
+        if (partes[3] != "Sin descripción")
+          Console.WriteLine("Descripción: "+ partes[3]);
+      }
+    }
+
   public static void imprimirAyuda() {
     System.out.println("Tasker - Gestor de tareas por directorio.");
     System.out.println();
