@@ -1,4 +1,5 @@
 class Mascotas {
+  int cod;
   String nombre;
   String animal;
   String dueñx;
@@ -8,6 +9,10 @@ class Mascotas {
     this.nombre = nombre;
     this.animal = animal;
     this.dueñx = dueñx;
+  }
+
+  public int getCod() {
+    return cod;
   }
 
   public String getNombre() {
