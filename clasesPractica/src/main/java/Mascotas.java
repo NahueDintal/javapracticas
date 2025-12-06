@@ -5,7 +5,8 @@ class Mascotas {
   String dueñx;
 
   // Constructor
-  public Mascotas(String nombre, String animal, String dueñx) {
+  public Mascotas(int cod, String nombre, String animal, String dueñx) {
+    this.cod = cod;
     this.nombre = nombre;
     this.animal = animal;
     this.dueñx = dueñx;
@@ -25,6 +26,10 @@ class Mascotas {
 
   public String getDueñx() {
     return dueñx;
+  }
+
+  public void setCod(int cod) {
+    this.cod = cod;
   }
 
   public void setNombre(String nombre) {
