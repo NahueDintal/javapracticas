@@ -75,8 +75,30 @@ public class Main {
   }
 
   public static void modificarMascota() {
-    busquedaCodigo();
-    agreagarMascota();
+    System.out.print("Ingrese código para modificar: ");
+    int codigo = sc.nextInt();
+    sc.nextLine();
+
+    for (Mascotas m : listaMascotas) {
+      if (m.getCod() == codigo) {
+        System.out.println("Mascota encontrada: ");
+        System.out.println("Código: " + m.getCod());
+        System.out.println("Nombre: " + m.getNombre());
+        System.out.println("Animal: " + m.getAnimal());
+        System.out.println("Dueñx: " + m.getDueñx());
+      }
+    }
+
+    System.out.print("Ingresar nombre mascota: ");
+    String nombre = (sc.nextLine());
+    System.out.print("Ingresar animal mascota: ");
+    String animal = (sc.nextLine());
+    System.out.print("Ingresar dueñx mascota: ");
+    String dueñx = (sc.nextLine());
+    Mascotas nuevaMascota = new Mascotas(codigo, nombre, animal, dueñx);
+    listaMascotas.add(nuevaMascota);
+
+    System.out.println("Mascota modificada éxito");
   }
 
   public static void mostrarMascota() {
@@ -106,8 +128,6 @@ public class Main {
         System.out.println("Animal: " + m.getAnimal());
         System.out.println("Dueñx: " + m.getDueñx());
       }
-
     }
-
   }
 }
