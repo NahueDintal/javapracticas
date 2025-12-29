@@ -1,7 +1,7 @@
 public class Main {
   public static void main(String[] args) {
     int[] numeros = { 10, 15, 20, 25, 30, 35 };
-    int buscar = 20;
+    int buscar = 21;
 
     int resultadoBinario = Busqueda.binaria(numeros, buscar);
 

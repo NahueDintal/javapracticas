@@ -1,19 +1,19 @@
 public class Busqueda {
   public static int binaria(int[] array, int elementoBuscado) {
-    int izquierda = 0; // Inicio del array
-    int derecha = array.length - 1; // Final del array
+    int izquierda = 0;
+    int derecha = array.length - 1;
 
     while (izquierda <= derecha) {
       int medio = izquierda + (derecha - izquierda) / 2;
 
       if (array[medio] == elementoBuscado) {
-        return medio; // ¡Encontrado! Devolvemos posición
+        return medio;
       }
 
       if (array[medio] < elementoBuscado) {
-        izquierda = medio + 1; // Buscamos en la mitad DERECHA
+        izquierda = medio + 1;
       } else {
-        derecha = medio - 1; // Buscamos en la mitad IZQUIERDA
+        derecha = medio - 1;
       }
     }
     return -1;
