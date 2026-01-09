@@ -54,8 +54,8 @@ public class SintaxisJava {
     final int DIAS_SEMANA = 7;
 
     // Inferencia de tipos (Java 10+)
-    var numero = 10; // Infiere que es int
-    var mensaje = "Hola"; // Infiere que es String
+    var numero = 10; // Deduce que es int
+    var mensaje = "Hola"; // Deduce que es String
 
     // Mostrar valores
     System.out.println("byte: " + byteVar);
@@ -103,7 +103,7 @@ public class SintaxisJava {
     // Operadores de comparación
     System.out.println("10 > 5: " + (10 > 5)); // true
     System.out.println("10 < 5: " + (10 < 5)); // false
-    System.out.println("10 == 10: " + (10 == 10)); // true
+    System.out.println("10 == 10: " + (10 == 11)); // true
     System.out.println("10 != 5: " + (10 != 5)); // true
     System.out.println("10 >= 10: " + (10 >= 10)); // true
 

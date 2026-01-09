@@ -29,5 +29,4 @@ public class Main {
             ? "Elemento no encontrado"
             : "Elemento contrado en la posicion: " + resultadoLineal);
   }
-
 }

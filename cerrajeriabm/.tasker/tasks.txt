@@ -5,3 +5,5 @@
 5|clase de manijas|09/01/2026|Sin descripción|Sin tipo|media
 6|clase de camaras de seguridad|09/01/2026|Sin descripción|Sin tipo|media
 7|clase de alarmas|09/01/2026|Sin descripción|Sin tipo|media
+8|creador de presuepuesto con la base de datos cerrajeria|09/01/2026|Sin descripción|Sin tipo|media
+9|conección con base de datos por contenedor|09/01/2026|Sin descripción|Sin tipo|media

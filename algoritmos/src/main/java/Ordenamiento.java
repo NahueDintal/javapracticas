@@ -47,7 +47,15 @@ public class Ordenamiento {
       int middle = left + (right - left) / 2;
       mergeSort(arr, left, middle, temp);
       mergeSort(arr, middle + 1, right, temp);
+      
+      merge(arr, left, middle, right);
 
+    }
+    private static void merge(int[] arr, int left, int middlr, int right) {
+      int n1 = midle - left + 1;
+      int n2 = right - middle;
+
+      int[] L 
     }
   }
 
