@@ -1,9 +1,9 @@
-1|clase de abtraccion de mercadería|09/01/2026|Sin descripción|Sin tipo|media
+1|clase de abtraccion de mercadería|09/01/2026|Sin descripción|Sin tipo|media|completada
 2|clase de cerraduras|09/01/2026|Sin descripción|Sin tipo|media
 3|clase de candados|09/01/2026|Sin descripción|Sin tipo|media
 4|clase de pasadores|09/01/2026|Sin descripción|Sin tipo|media
 5|clase de manijas|09/01/2026|Sin descripción|Sin tipo|media
 6|clase de camaras de seguridad|09/01/2026|Sin descripción|Sin tipo|media
-7|clase de alarmas|09/01/2026|Sin descripción|Sin tipo|media
+7|clase de alarmas|09/01/2026|Sin descripción|Sin tipo|media|completada
 8|creador de presuepuesto con la base de datos cerrajeria|09/01/2026|Sin descripción|Sin tipo|media
 9|conección con base de datos por contenedor|09/01/2026|Sin descripción|Sin tipo|media
