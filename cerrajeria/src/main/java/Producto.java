@@ -1,4 +1,3 @@
-
 public class Producto {
   // Atributos campos
   private int id;

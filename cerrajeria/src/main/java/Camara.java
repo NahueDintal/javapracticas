@@ -1,4 +1,3 @@
-
 public class Camara extends Producto {
   private String tipoConexion;
 
