@@ -7,8 +7,8 @@ public class Main {
     Candado candado1 = new Candado(02, "Can001", "Olaen", "Art.30", 5, 30000, 2);
     candado1.mostrarInformacion();
 
-    Cerradura cerradura1 = new Cerradura(03, "Cer001", "Prive", "208", 6, 35000, 4);
-    cerradura1.mostrarInformacion();
-
+    // Cerradura cerradura1 = new Cerradura(03, "Cer001", "Prive", "208", 6, 35000,
+    // 4);
+    // cerradura1.mostrarInformacion();
   }
 }

@@ -4,7 +4,6 @@ public class Camara extends Producto {
 
   public Camara(int id, String codigo, String marca, String modelo, int stock, double precio, String tipoConexion) {
     super(id, codigo, marca, modelo, stock, precio);
-
     this.tipoConexion = tipoConexion;
   }
 
