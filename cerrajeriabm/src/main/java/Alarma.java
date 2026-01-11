@@ -1,4 +1,3 @@
-package cerrajeriabm.src.main.java.com.cerrajeriamb;
 
 public class Alarma extends Producto {
   private boolean inalambrico;

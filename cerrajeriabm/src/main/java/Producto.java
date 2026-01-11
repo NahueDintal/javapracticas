@@ -1,4 +1,3 @@
-package cerrajeriabm.src.main.java.com.cerrajeriamb;
 
 public class Producto {
   // Atributos campos

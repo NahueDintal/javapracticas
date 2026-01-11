@@ -1,4 +1,3 @@
-package cerrajeriabm.src.main.java.com.cerrajeriamb;
 
 public class Camara extends Producto {
   private String tipoConexion;
