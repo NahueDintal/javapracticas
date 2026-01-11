@@ -1,3 +1,5 @@
+package cerrajeriabm.src.main.java.com.cerrajeriamb;
+
 public class Producto {
   // Atributos campos
   private int id;
@@ -9,7 +11,7 @@ public class Producto {
 
   // Constructor con parametros
   public Producto(int id, String Codigo, String Marca, String Modelo, int Stock, double Precio) {
-    this.id = 0;
+    this.id = id;
     this.codigo = Codigo;
     this.marca = Marca;
     this.modelo = Modelo;
@@ -34,7 +36,7 @@ public class Producto {
     return marca;
   }
 
-  public void setNombre(String Marca) {
+  public void setMarca(String Marca) {
     this.marca = Marca;
   }
 
@@ -63,7 +65,7 @@ public class Producto {
   }
 
   // Método personalizado
-  public void MostrarInformacion() {
+  public void mostrarInformacion() {
     System.out.println("Id: " + id);
     System.out.println("Código: " + codigo);
     System.out.println("Marca: " + marca);
