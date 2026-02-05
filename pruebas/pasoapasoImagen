@@ -1,0 +1,36 @@
+crear Dockerfile para copiar el programa en el contenedor
+
+ejemplo de Dockerfile:
+
+  FROM alpine:latest
+  RUN apk update && apk add --no-cache openjdk25-jre
+  COPY MiPrograma.jar /app.jar
+  CMD ["java", "-jar", "/app.jar"]
+
+luego 'build' y construyes la imagen, lo importar es el punto al final, 
+ya que utilizar el docker file y el docker-compose para las especificaciones
+de la imagen!
+
+> podman build -t mi-imagen:latest .
+
+*en mi imagen le pones el nombre correcpondiente
+
+luego ves la images que tenes disponibles para ejecutar
+
+> podman images
+
+luego lo corres, con caracteristicas como el puerto que necesitas o simplemente
+lo levantas
+
+> podman run -d -p 8080:80 --name mi-contenedor mi-imagen:latest
+
+o sino con lo más simple y sigue las especificaciones de la imagen
+
+> podman -it prueba
+
+y levanta el programa directo por contenedor!
+
+** Detalles **
+-Vigilar los nombres del programa .jar por ejemplo con el que especifica el 
+dockerfile.
+-
