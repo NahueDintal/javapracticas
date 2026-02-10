@@ -6,6 +6,11 @@ public class Manija extends Producto {
     this.color = color;
   }
 
+  public Manija(String codigo, String marca, String modelo, int stock, double precio, String color) {
+    super(codigo, marca, modelo, stock, precio);
+    this.color = color;
+  }
+
   public String getColor() {
     return color;
   }

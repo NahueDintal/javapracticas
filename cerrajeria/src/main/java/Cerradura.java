@@ -9,6 +9,13 @@ public class Cerradura extends Producto {
     this.cantidadCombinaciones = cantidadCombinaciones;
   }
 
+  public Cerradura(String codigo, String marca, String modelo, int stock, double precio,
+      int cantidadCombinaciones) {
+    super(codigo, marca, modelo, stock, precio);
+
+    this.cantidadCombinaciones = cantidadCombinaciones;
+  }
+
   public int getCantidadCombinaciones() {
     return cantidadCombinaciones;
   }

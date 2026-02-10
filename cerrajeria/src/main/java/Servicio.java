@@ -1,33 +1,29 @@
-// servicio
+import java.util.Collection;
 
-// busqueda de productos por distintos medios, por id, por marca, etc
+public class Servicio {
+  private Inventario inventario;
 
-// por id
-public int BusquedaProducto(int id) {
-  if (id == getId()) {
-    mostrarInformacion();
-  } else {
-    throw new IllegalArgument("No se encuentra el producto.");
+  public Servicio(Inventario inventario) {
+    this.inventario = inventario;
   }
 
-}
+  public Producto buscarProductoPorId(int id) {
+    Collection<Producto> productos = inventario.getTodosLosProductos();
+    for (Producto producto : productos) {
+      if (producto.getId() == id) {
+        return producto;
+      }
+    }
+    throw new IllegalArgumentException("No se encuentra el producto con ID: " + id);
+  }
 
-// por marca
-public String BusquedaMarca(String marca) {
-  if (marca == getMarca()) {
-    mostrarInformacion();
-  } else {
-    throw new IllegalArgument("No se encuentra la Marca ingresada.");
+  public Producto buscarProductoPorMarca(String marca) {
+    Collection<Producto> productos = inventario.getTodosLosProductos();
+    for (Producto producto : productos) {
+      if (producto.getMarca().equalsIgnoreCase(marca)) {
+        return producto;
+      }
+    }
+    throw new IllegalArgumentException("No se encuentra el producto con la Marca: " + marca);
   }
 }
-
-// por precio
-
-// aciones abm sobre productos
-// agregar
-// bajar
-// modificar
-// calculos de precios, etc
-// persistencia, guardado y actualizaciones
-// historial de cambios
-// generacion de reportes

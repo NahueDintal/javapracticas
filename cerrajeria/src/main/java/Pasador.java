@@ -9,6 +9,13 @@ public class Pasador extends Producto {
     this.conLlave = conLlave;
   }
 
+  public Pasador(String codigo, String marca, String modelo, int stock, double precio, String color,
+      boolean conLlave) {
+    super(codigo, marca, modelo, stock, precio);
+    this.color = color;
+    this.conLlave = conLlave;
+  }
+
   public String getColor() {
     return color;
   }

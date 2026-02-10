@@ -1,12 +1,28 @@
 public class Main {
   public static void main(String[] args) {
+    Inventario inventario = new Inventario();
 
-    Fabrica.nuevaAlarma(1, "AL001", "Ezviz", "C9C", 4, 95000, true);
+    // Crear productos usando la fábrica (sin ID)
+    Producto alarma = Fabrica.nuevaAlarma("AL001", "Ezviz", "C9C", 4, 95000, true);
+    Producto candado = Fabrica.nuevoCandado("Can001", "Olaen", "Art.30", 5, 30000, 2);
 
-    Fabrica.nuevoCandado(02, "Can001", "Olaen", "Art.30", 5, 30000, 2);
+    // Agregar al inventario
+    inventario.agregarOActualizarProducto(alarma);
+    inventario.agregarOActualizarProducto(candado);
 
-    // Cerradura cerradura1 = new Cerradura(03, "Cer001", "Prive", "208", 6, 35000,
-    // 4);
-    // cerradura1.mostrarInformacion();
+    // Mostrar información
+    System.out.println("=== Productos en Inventario ===");
+    inventario.mostrarTodos();
+
+    // Probar el servicio
+    Servicio servicio = new Servicio(inventario);
+
+    try {
+      System.out.println("\n=== Buscar por ID ===");
+      Producto encontrado = servicio.buscarProductoPorId(1);
+      encontrado.mostrarInformacion();
+    } catch (Exception e) {
+      System.out.println("Error: " + e.getMessage());
+    }
   }
 }

@@ -8,6 +8,12 @@ public class Candado extends Producto {
     this.cantidadLlaves = cantidadLlaves;
   }
 
+  public Candado(String codigo, String marca, String modelo, int stock, double precio, int cantidadLlaves) {
+    super(codigo, marca, modelo, stock, precio);
+
+    this.cantidadLlaves = cantidadLlaves;
+  }
+
   public int getCantidadLlaves() {
     return cantidadLlaves;
   }

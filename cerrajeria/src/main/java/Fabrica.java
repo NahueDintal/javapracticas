@@ -33,7 +33,7 @@ public class Fabrica {
   public static Producto nuevaManija(String codigo, String marca,
       String modelo, int stock, double precio, String color) {
     validaciones(marca, modelo, precio, stock);
-    return new Camara(codigo, marca, modelo, stock, precio, color);
+    return new Manija(codigo, marca, modelo, stock, precio, color);
   }
 
   public static Producto cargarDesdeBaseDatos(int id, String codigo, String marca,
@@ -61,7 +61,7 @@ public class Fabrica {
     if (marca == null || marca.trim().isEmpty()) {
       throw new IllegalArgumentException("No puede estar vacío el nombre de la marca");
     }
-    if (modelo == null || marca.trim().isEmpty()) {
+    if (modelo == null || modelo.trim().isEmpty()) {
       throw new IllegalArgumentException("No puede estar vacío el nombre del modelo");
     }
     if (precio <= 0) {

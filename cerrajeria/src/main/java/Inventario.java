@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collection;
 
 public class Inventario {
   private Map<String, Producto> productosPorCodigo;
@@ -43,5 +44,9 @@ public class Inventario {
       p.mostrarInformacion();
       System.out.println("-------------------");
     }
+  }
+
+  public Collection<Producto> getTodosLosProductos() {
+    return productosPorCodigo.values();
   }
 }
