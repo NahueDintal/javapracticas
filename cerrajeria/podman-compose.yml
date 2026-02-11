@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  mariadb:
+    build:
+      context: .
+      dockerfile: Dockerfile.mariadb
+    container_name: seguridad-mariadb
+    hostname: seguridad-db
+    restart: unless-stopped
+    environment:
+      - MARIADB_ROOT_PASSWORD=rootpassword
+      - MARIADB_DATABASE=seguridad_db
+      - MARIADB_USER=seguridad_user
+      - MARIADB_PASSWORD=seguridad_pass
+    ports:
+      - "3307:3306"  # Puerto externo 3307 para evitar conflictos
+    volumes:
+      - mariadb_data:/var/lib/mysql:Z
+      - mariadb_logs:/var/log/mysql:Z
+      - ./backups:/backups:Z
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf:ro
+    networks:
+      - seguridad-net
+    security_opt:
+      - label=disable
+      - no-new-privileges:true
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    sysctls:
+      - net.core.somaxconn=1024
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    command: >
+      mysqld
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --max-connections=500
+      --innodb-buffer-pool-size=256M
+
+  adminer:
+    image: adminer:latest
+    container_name: seguridad-adminer
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=mariadb
+    depends_on:
+      - mariadb
+    networks:
+      - seguridad-net
+
+networks:
+  seguridad-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  mariadb_data:
+    driver: local
+  mariadb_logs:
+    driver: local
