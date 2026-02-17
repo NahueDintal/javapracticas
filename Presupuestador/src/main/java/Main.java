@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Main {
+
+  private static final int HORASXSEMANA = 40;
+
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     int opcion = 0;
@@ -32,82 +35,56 @@ public class Main {
     scanner.close();
   }
 
+  public static int leerInt(Scanner scanner, String mensaje) {
+    while (true) {
+      System.out.print(mensaje);
+      try {
+        return Integer.parseInt(scanner.nextLine());
+      } catch (NumberFormatException e) {
+        System.out.println("Error, debe ingresar un numero entero.");
+      }
+    }
+  }
+
+  public static double leerDouble(Scanner scanner, String mensaje) {
+    while (true) {
+      System.out.print(mensaje);
+      try {
+        return Double.parseDouble(scanner.nextLine());
+      } catch (NumberFormatException e) {
+        System.out.println("Error, debe ingresar un numero double.");
+      }
+    }
+  }
+
   public static void configurarAjustes(Scanner scanner) {
-    double costoMateriales = 0;
-    boolean okCostoMateriales = false;
+    double costoMateriales = leerDouble(scanner, ":: Costo de materiales: ");
+    double horas = leerInt(scanner, ":: Horas estimadas de trabajo: ");
+    double canastaBasicaFamiliar = leerDouble(scanner, ":: Canasta basica: ");
 
-    while (!okCostoMateriales) {
-      System.out.print(":: Costo de materiales: ");
-      String linea = scanner.nextLine();
-      try {
-        costoMateriales = Double.parseDouble(linea);
-        okCostoMateriales = true;
-      } catch (NumberFormatException e) {
-        System.out.println("Por favor ingresa solo numeros y punto para decimal...");
-      }
-    }
+    System.out.println(":: Nivel de herramientas utilizadas. ");
+    System.out.println("    1: Herramientas manuales. ");
+    System.out.println("    2: Herramientas electricas. ");
+    System.out.println("    3: Equipo pesado, roto y escalera. ");
 
-    double horas = 0;
-    boolean okHoras = false;
-    while (!okHoras) {
-      System.out.print(":: Horas estimadas de trabajo: ");
-      String linea = scanner.nextLine();
-      try {
-        horas = Double.parseDouble(linea);
-        okHoras = true;
-      } catch (NumberFormatException e) {
-        System.out.println("Por favor, solo ingresa horas...");
-      }
-    }
-
-    double canastaBasicaFamiliar = 0;
-    boolean okCanastaBasicaFamiliar = false;
-    while (!okCanastaBasicaFamiliar) {
-      System.out.print(":: Canasta basica familiar: $");
-      String linea = scanner.nextLine();
-      try {
-        canastaBasicaFamiliar = Double.parseDouble(linea);
-        okCanastaBasicaFamiliar = true;
-      } catch (NumberFormatException e) {
-        System.out.println("Por favor solo, ingresa el monto en pesos...");
-      }
-    }
-
-    int nivelHerramientas = 0;
-    boolean okNivelHerramientas = false;
-    double multiplicador = 0;
-    while (!okNivelHerramientas) {
-      System.out.println(":: Nivel de herramientas utilizadas. ");
-      System.out.println("    1: Herramientas manuales. ");
-      System.out.println("    2: Herramientas electricas. ");
-      System.out.println("    3: Equipo pesado, roto y escalera. ");
-      System.out.print(":: Opcion: ");
-      String linea = scanner.nextLine();
-
-      try {
-        nivelHerramientas = Integer.parseInt(linea);
-        okNivelHerramientas = true;
-        multiplicador = 0;
-        switch (nivelHerramientas) {
-          case 1:
-            multiplicador = 1.0;
-            break;
-          case 2:
-            multiplicador = 1.3;
-            break;
-          case 3:
-            multiplicador = 1.6;
-            break;
-          default:
-            multiplicador = 1.0;
-        }
-      } catch (NumberFormatException e) {
-        System.out.println("Por favor, elija solo una de las opciones...");
-      }
+    int nivelHerramientas = leerInt(scanner, ":: Opcion");
+    double multiplicador;
+    switch (nivelHerramientas) {
+      case 1:
+        multiplicador = 1.0;
+        break;
+      case 2:
+        multiplicador = 1.3;
+        break;
+      case 3:
+        multiplicador = 1.6;
+        break;
+      default:
+        multiplicador = 1.0;
     }
 
     // Procesos
-    double tarifaBase = canastaBasicaFamiliar / 40;
+    double tarifaBase = canastaBasicaFamiliar / HORASXSEMANA;
     double CostoManoDeObra = horas * (tarifaBase * multiplicador);
     System.out.println(":: Costo de mano de obra: $" + CostoManoDeObra);
     System.out.println(":: Costo de materiales: $" + costoMateriales);
