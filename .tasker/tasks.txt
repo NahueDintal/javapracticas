@@ -1,2 +1,3 @@
-1|1ra tarea en tasker en java|05/12/2025|seguir con las clases y con las herencias|Sin tipo|media
-2|seguir con alarma, ejercicio de clases|05/12/2025|Sin descripción|Sin tipo|media
+1|1ra tarea en tasker en java|05/12/2025|seguir con las clases y con las herencias|Sin tipo|media|completada
+2|seguir con alarma, ejercicio de clases|05/12/2025|Sin descripción|Sin tipo|media|completada
+3|practicas de manejo de errores|16/02/2026|Sin descripción|Sin tipo|media
