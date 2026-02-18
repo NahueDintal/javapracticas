@@ -5,13 +5,14 @@ public class Main {
   private static final int HORASXSEMANA = 40;
 
   public static void main(String[] args) {
+
     Scanner scanner = new Scanner(System.in);
     int opcion = 0;
     boolean ok = false;
 
     while (!ok) {
       System.out.println("::Calculadora de presupuesto!");
-      System.out.println("    1: Configurar condiciones. ");
+      System.out.println("    1: Condiciones. ");
       System.out.println("    2: Salir!");
       System.out.print(":: Opcion: ");
       String linea = scanner.nextLine();
@@ -39,7 +40,12 @@ public class Main {
     while (true) {
       System.out.print(mensaje);
       try {
-        return Integer.parseInt(scanner.nextLine());
+        int valor = Integer.parseInt(scanner.nextLine());
+        if (valor <= 0) {
+          System.out.println("Error, debe ingresar un mayor a cero.");
+        } else {
+          return valor;
+        }
       } catch (NumberFormatException e) {
         System.out.println("Error, debe ingresar un numero entero.");
       }
@@ -50,7 +56,12 @@ public class Main {
     while (true) {
       System.out.print(mensaje);
       try {
-        return Double.parseDouble(scanner.nextLine());
+        double valor = Double.parseDouble(scanner.nextLine());
+        if (valor <= 0) {
+          System.out.println("Error, debe ingresar un mayor a cero.");
+        } else {
+          return valor;
+        }
       } catch (NumberFormatException e) {
         System.out.println("Error, debe ingresar un numero double.");
       }
@@ -67,7 +78,7 @@ public class Main {
     System.out.println("    2: Herramientas electricas. ");
     System.out.println("    3: Equipo pesado, roto y escalera. ");
 
-    int nivelHerramientas = leerInt(scanner, ":: Opcion");
+    int nivelHerramientas = leerInt(scanner, ":: Opcion: ");
     double multiplicador;
     switch (nivelHerramientas) {
       case 1:
@@ -81,9 +92,9 @@ public class Main {
         break;
       default:
         multiplicador = 1.0;
+
     }
 
-    // Procesos
     double tarifaBase = canastaBasicaFamiliar / HORASXSEMANA;
     double CostoManoDeObra = horas * (tarifaBase * multiplicador);
     System.out.println(":: Costo de mano de obra: $" + CostoManoDeObra);
