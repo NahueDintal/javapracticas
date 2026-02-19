@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: seguridad
+data:
+  database: "seguridad_db"
+  user: "root"   # Si quieres crear un usuario no-root, mejor usa Secrets
