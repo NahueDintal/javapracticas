@@ -1,21 +1,28 @@
+// Calcular las horas trabajadas y su porcentaje de los empleados
+// Primero suma de horas, requisito para porcentaje.
+// Porcentaje de cada empleado
 public class Main {
   public static void main(String[] args) {
-    // Calcular las horas trabajadas y su porcentaje de los empleados
-    int[] horasTrabajadas = { 35, 40, 42, 38 };
-    String[] empleados = { "Juan", "Panchio", "Jorjitou", "Jesucristo" };
 
-    // Primero suma de horas, requisito para porcentaje.
-    int totalHoras = 0;
-    for (int i = 0; i < horasTrabajadas.length; i++) {
-      int horas = horasTrabajadas[i];
-      totalHoras += horas;
-    }
-
-    // Porcentaje de cada empleado
-    for (int i = 0; i < empleados.length; i++) {
-      double porcentaje = (horasTrabajadas[i] * 100) / totalHoras;
-      System.out.println("Porcentaje: " + porcentaje + "%");
-      System.out.println("Empleado: " + empleados[i]);
-    }
   }
+}
+
+class calculoHorasTrabajo {
+  public int horas;
+  public String nombre;
+  public String apellido;
+  public int dni;
+  public String cargo;
+  public int horasExtras;
+
+  public calculoHorasTrabajo(int horas, String nombre, String apellido, int dni, String cargo, int horasExtras) {
+    this.horas = horas;
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.dni = dni;
+    this.cargo = cargo;
+    this.horasExtras = horasExtras;
+
+  }
+
 }
