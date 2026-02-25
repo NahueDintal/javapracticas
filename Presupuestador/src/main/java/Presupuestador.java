@@ -10,7 +10,7 @@ class Presupuestador {
       throw new IllegalArgumentException("El valor de costo materiales debe ser positivo.");
     }
 
-    if (horas <= 0) {
+    if (horas < 0) {
       throw new IllegalArgumentException("El valor de horas deber ser positivo.");
     }
 
