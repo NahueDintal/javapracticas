@@ -4,7 +4,7 @@
 
 // Nombre del archivo DEBE coincidir con el nombre de la clase pública
 // Convención: PascalCase para clases
-public class SintaxisJava {
+public class sintaxisJava {
 
   // Método principal - punto de entrada del programa
   public static void main(String[] args) {

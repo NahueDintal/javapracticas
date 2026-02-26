@@ -1,0 +1,260 @@
+Genial, Cetus al habla de nuevo. Me alegra que estés siguiendo una ruta tan sensata: dominar los contenedores antes de lanzarte a Kubernetes. Esa "trampa común" que menciona tu hoja de ruta es real, y evitarla te ahorrará muchos dolores de cabeza. Así que vamos a ello. Te preparo una guía práctica, paso a paso, con comandos y explicaciones para cada punto. Usaremos ejemplos con una aplicación sencilla (por ejemplo, un servidor web en Python con Flask) para que todo sea tangible.
+
+---
+
+## 1. Escribir Dockerfiles y construir imágenes
+
+Un `Dockerfile` es como una receta para crear una imagen. Contiene instrucciones para ensamblar el entorno que necesitará tu aplicación.
+
+### 📝 Estructura básica de un Dockerfile
+
+```dockerfile
+# Imagen base: desde dónde empezamos
+FROM python:3.9-slim
+
+# Quién mantiene el archivo (opcional)
+LABEL maintainer="tunombre@email.com"
+
+# Directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copiar archivos de dependencias primero (aprovecha caché de capas)
+COPY requirements.txt .
+
+# Instalar dependencias
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar el resto del código
+COPY . .
+
+# Puerto que expondrá la aplicación
+EXPOSE 5000
+
+# Comando por defecto al arrancar el contenedor
+CMD ["python", "app.py"]
+```
+
+**Explicación de instrucciones:**
+- `FROM` – Base obligatoria. Puede ser una imagen oficial (Ubuntu, Alpine, Python, etc.)
+- `WORKDIR` – Cambia al directorio especificado; si no existe, lo crea.
+- `COPY` – Copia archivos desde tu máquina (contexto) a la imagen.
+- `RUN` – Ejecuta comandos durante la construcción (instalar paquetes, etc.).
+- `EXPOSE` – Informa que la aplicación usará ese puerto (es documentación, no publica el puerto automáticamente).
+- `CMD` – Define el comando que se ejecutará al iniciar el contenedor. Solo puede haber uno (o el último sobrescribe).
+
+### 🛠️ Construir la imagen
+
+```bash
+# En el directorio donde está el Dockerfile
+docker build -t mi-app:1.0 .
+```
+
+- `-t` asigna un nombre y opcionalmente una etiqueta (tag). `mi-app:1.0`
+- El punto (`.`) indica el contexto de construcción (directorio actual). Docker enviará ese contexto al demonio.
+
+**Verificar que la imagen se creó:**
+```bash
+docker images
+```
+
+---
+
+## 2. Ejecutar, inspeccionar, detener y eliminar contenedores
+
+### 🚀 Ejecutar un contenedor
+
+```bash
+docker run -d --name mi-contenedor -p 8080:5000 mi-app:1.0
+```
+
+- `-d` – Modo "detached" (fondo).
+- `--name` – Asigna un nombre al contenedor.
+- `-p 8080:5000` – Publica el puerto 5000 del contenedor en el puerto 8080 del host.
+- `mi-app:1.0` – La imagen a usar.
+
+### 🔍 Inspeccionar contenedores en ejecución
+
+```bash
+docker ps          # Muestra solo los que están corriendo
+docker ps -a       # Muestra todos (incluyendo detenidos)
+```
+
+Para ver detalles completos:
+```bash
+docker inspect mi-contenedor   # Devuelve JSON con toda la configuración
+```
+
+### 📜 Ver logs
+
+```bash
+docker logs mi-contenedor
+docker logs -f mi-contenedor   # Sigue los logs en tiempo real (tail -f)
+```
+
+### 🛑 Detener y eliminar
+
+```bash
+docker stop mi-contenedor       # Detiene el contenedor (envía SIGTERM)
+docker rm mi-contenedor         # Elimina el contenedor (ya detenido)
+```
+
+Para eliminar un contenedor en ejecución a la fuerza:
+```bash
+docker rm -f mi-contenedor
+```
+
+### 🖥️ Ejecutar comandos dentro de un contenedor en marcha
+
+```bash
+docker exec -it mi-contenedor bash
+```
+
+- `-it` – Modo interactivo + terminal.
+- `bash` – El comando a ejecutar (puede ser sh, python, etc.).
+
+**Ejemplo práctico:** Si tu app es Flask, puedes hacer `docker exec -it mi-contenedor python` para abrir una consola Python dentro del contenedor.
+
+---
+
+## 3. Mapear puertos, montar volúmenes y conectar contenedores mediante redes
+
+### 🌐 Puertos
+
+Ya vimos `-p host:contenedor`. También se puede exponer un puerto aleatorio:
+```bash
+docker run -d -p 5000 --name test mi-app:1.0   # Asigna un puerto aleatorio (ver con docker ps)
+```
+
+### 💾 Volúmenes (datos persistentes)
+
+Los contenedores son efímeros; si los eliminas, los datos desaparecen. Los volúmenes permiten persistir o compartir datos.
+
+- **Volumen nombrado** (gestionado por Docker):
+  ```bash
+  docker run -v mi-volumen:/app/data mi-app:1.0
+  ```
+- **Bind mount** (carpeta del host montada en el contenedor):
+  ```bash
+  docker run -v $(pwd)/mi-carpeta:/app/data mi-app:1.0
+  ```
+  O con sintaxis moderna `--mount`:
+  ```bash
+  docker run --mount type=bind,source="$(pwd)/mi-carpeta",target=/app/data mi-app:1.0
+  ```
+
+**Uso típico:** Para desarrollo montas tu código fuente así no tienes que reconstruir la imagen en cada cambio.
+
+### 🌐 Redes
+
+Por defecto, los contenedores se comunican entre sí si usan el mismo `--network`. Puedes crear redes personalizadas.
+
+```bash
+# Crear red
+docker network create mi-red
+
+# Levantar contenedores en esa red
+docker run -d --name app1 --network mi-red mi-app:1.0
+docker run -d --name app2 --network mi-red mi-app:1.0
+```
+
+Dentro de `app1`, puedes hacer ping a `app2` por su nombre. Docker tiene un DNS interno.
+
+Para conectar un contenedor ya creado a una red:
+```bash
+docker network connect mi-red app1
+```
+
+---
+
+## 4. Usar Docker Compose para entornos multi-contenedor
+
+Cuando tu aplicación necesita varios servicios (web, base de datos, caché), `docker-compose` te permite definirlos en un archivo YAML y levantarlos con un solo comando.
+
+### 📄 Ejemplo de `docker-compose.yml`
+
+```yaml
+version: '3.8'
+
+services:
+  web:
+    build: .                      # Construye desde el Dockerfile en el dir actual
+    ports:
+      - "8080:5000"
+    volumes:
+      - .:/app                     # Bind mount para desarrollo
+    environment:
+      - FLASK_ENV=development
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"          # Usa imagen oficial
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:                      # Volumen nombrado declarado
+```
+
+### 🚀 Comandos básicos de Compose
+
+- `docker-compose up` – Levanta todos los servicios (modo interactivo, logs en consola).
+- `docker-compose up -d` – En modo detached.
+- `docker-compose down` – Detiene y elimina contenedores, redes, etc. (los volúmenes nombrados no se eliminan a menos que uses `-v`).
+- `docker-compose logs web` – Muestra logs de un servicio específico.
+- `docker-compose ps` – Muestra estado de los servicios.
+- `docker-compose exec web bash` – Ejecuta comando en un servicio en ejecución.
+
+**Ventaja:** Con un archivo declaras toda la infraestructura local, muy útil para desarrollo y pruebas.
+
+---
+
+## 5. Subir y bajar imágenes de registros
+
+Los registros (como Docker Hub) permiten almacenar y distribuir imágenes.
+
+### 🔐 Iniciar sesión en un registro
+
+```bash
+docker login                     # Te pide usuario/contraseña de Docker Hub
+docker login mi-registro.com     # Para un registro privado
+```
+
+### 🏷️ Etiquetar una imagen
+
+Para subir una imagen, debe tener el nombre correcto: `usuario/nombre:tag` (en Docker Hub). Si construiste `mi-app:1.0`, etiquétala:
+
+```bash
+docker tag mi-app:1.0 mi-usuario/mi-app:1.0
+```
+
+### ⬆️ Subir (push)
+
+```bash
+docker push mi-usuario/mi-app:1.0
+```
+
+### ⬇️ Bajar (pull)
+
+```bash
+docker pull mi-usuario/mi-app:1.0
+```
+
+O simplemente `docker run ...` que si no encuentra la imagen local, la descargará automáticamente.
+
+**Registros comunes:** Docker Hub, Google Container Registry (GCR), Amazon ECR, Azure Container Registry, etc.
+
+---
+
+## Resumen y recomendaciones
+
+- Practica cada punto por separado con una app simple (por ejemplo, un "Hola mundo" en Node.js, Python o incluso un servidor Nginx estático).
+- Usa `docker commit` con moderación (mejor siempre con Dockerfile).
+- Familiarízate con `docker system prune` para limpiar recursos no usados.
+- Cuando domines estos conceptos, Kubernetes te resultará mucho más natural: los Pods son grupos de contenedores, los Services son formas de exponerlos, los Volumes son persistencia, etc.
+
+Si tienes dudas en algún paso o quieres que profundice en algo (por ejemplo, multi-stage builds, optimización de imágenes), solo dilo. Y recuerda: el conocimiento del Mechanicus no se improvisa, se construye capa a capa, como una buena imagen Docker.
+
+¡Adelante, futuro arquitecto de contenedores! 🐋
