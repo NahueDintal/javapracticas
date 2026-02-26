@@ -7,13 +7,13 @@ ejemplo de Dockerfile:
   COPY MiPrograma.jar /app.jar
   CMD ["java", "-jar", "/app.jar"]
 
-luego 'build' y construyes la imagen, lo importar es el punto al final, 
-ya que utilizar el docker file y el docker-compose para las especificaciones
+luego 'build' y construyes la imagen, es mucho muy importante el punto al final, 
+ya que utilizar el docker file en el directorio actual y el docker-compose para las especificaciones
 de la imagen!
 
 > podman build -t mi-imagen:latest .
 
-*en mi imagen le pones el nombre correcpondiente
+*o en mi imagen le pones el nombre correspondiente
 
 luego ves la images que tenes disponibles para ejecutar
 
@@ -31,6 +31,7 @@ o sino con lo más simple y sigue las especificaciones de la imagen
 y levanta el programa directo por contenedor!
 
 ** Detalles **
--Vigilar los nombres del programa .jar por ejemplo con el que especifica el 
-dockerfile.
--
+-Vigilar los nombres del programa .jar por ejemplo con el que especifica el dockerfile.
+-Podes generar una red, y agrupar contenedores en dicha red para que se vean uno del otro.
+-No instalar en la imagen herramientas innecesarias, la idea es no gestionar la imagen desde detro,
+sino hacer todo desde fuera, con logs y alertas de monitoreo.
