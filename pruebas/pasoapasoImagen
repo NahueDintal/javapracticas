@@ -13,7 +13,20 @@ de la imagen!
 
 > podman build -t mi-imagen:latest .
 
+en caso de error en /etc/containers/registries.conf
+hay que agregar esta linea
+
+> unqualified-search-registries = ["docker.io"]
+
+esto es para que podman busque en docker.io las imagenes que necesitamos!
+
 *o en mi imagen le pones el nombre correspondiente
+
+en el caso de hacer una imagen desde una composicion de directorios compleja, podes usar -f para decirle
+a podman donde está el docker file, y desde el dockerfile las acciones que necesite, por ejemplo, 
+copiar un .jar dentro del contenedor.
+
+> podman build -t cerrajeria-app -f k8s/app/Dockerfile .
 
 luego ves la images que tenes disponibles para ejecutar
 
