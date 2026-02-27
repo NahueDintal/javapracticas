@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql:
-    image: cerrajeria-sql:latest
+    image: cerrajeria-mysql:latest
     container_name: mysql
     env_file:
       - .env
