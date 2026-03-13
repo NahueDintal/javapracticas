@@ -1,8 +1,0 @@
-{
-  "name": "clipBoard",
-  "version": "1.0.0",
-  "mainClass": "Main",
-  "sourceDirectories": ["src/main/java"],
-  "testDirectories": ["src/test/java"],
-  "dependencies": []
-}
