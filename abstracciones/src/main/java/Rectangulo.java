@@ -1,5 +1,6 @@
 public class Rectangulo extends Figura {
-  private double base, altura;
+  private double base;
+  private double altura;
 
   public Rectangulo(String color, double base, double altura) {
     super(color);
@@ -8,7 +9,7 @@ public class Rectangulo extends Figura {
   }
 
   @Override
-  public double calcularArea() {
+  public double calculoArea() {
     return base * altura;
   }
 }

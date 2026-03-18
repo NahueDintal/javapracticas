@@ -1,9 +1,9 @@
 public class Main {
   public static void main(String[] args) {
-    Circulo figura1 = new Circulo("Azul", 15);
-    Rectangulo figura2 = new Rectangulo("Rojo", 4, 5);
+    Circulo fig1 = new Circulo("rojo", 45);
+    Rectangulo fig2 = new Rectangulo("violeta", 15, 155);
 
-    System.out.println("Calculo de area figura 1: " + figura1.calcularArea());
-    System.out.println("Calculo de area figura 2: " + figura2.calcularArea());
+    System.out.println("Calculo de area figura 1: " + fig1.calculoArea());
+    System.out.println("Calculo de area figura 2: " + fig2.calculoArea());
   }
 }
