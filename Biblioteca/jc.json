@@ -1,10 +1,10 @@
 {
-  "name": "asdf",
+  "name": "Biblioteca",
   "version": "1.0.0",
   "mainClass": "Main",
   "sourceDirectories": ["src"],
   "testDirectories": [],
   "dependencies": [],
-  "outputDirectory": "out/production/asdf",
+  "outputDirectory": "out/production/Biblioteca",
   "javaVersion": 17
 }
