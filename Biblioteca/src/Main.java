@@ -6,7 +6,11 @@ public class Main {
 
     Usuario user = new Usuario(123, "Jampa", "Del Valle");
 
-    biblioteca.prestarLibro("111", 123);
+    biblioteca.prestarLibro("111", user);
+
+    biblioteca.mostrarCatalogo();
+
+    biblioteca.prestarLibro("111", user);
 
   }
 

@@ -3,7 +3,7 @@ public class Libro {
   private String titulo;
   private String autor;
   private int anioPublicacion;
-  private boolean disponible;
+  private boolean disponible = true;
 
   public Libro(String isbn, String titulo, String autor, int anioPublicacion, boolean disponible) {
     this.isbn = isbn;
@@ -25,7 +25,7 @@ public class Libro {
     return autor;
   }
 
-  public boolean getDispobible() {
+  public boolean getDisponible() {
     return disponible;
   }
 

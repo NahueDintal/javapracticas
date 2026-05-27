@@ -26,8 +26,8 @@ public class Usuario {
     return apellido;
   }
 
-  public Libro agregarPrestamo(Libro libro) {
-    libro.add(prestamos);
+  public void agregarPrestamo(Libro libro) {
+    prestamos.add(libro);
   }
 
   public boolean devolverLibro(Libro libro) {

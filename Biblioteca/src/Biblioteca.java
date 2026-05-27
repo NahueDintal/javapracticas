@@ -20,19 +20,23 @@ public class Biblioteca {
     String isbnBuscado = isbn;
     for (Libro libro : catalogo) {
       if (libro.getIsbn().equals(isbnBuscado)) {
-        System.out.println(libro.getTitulo() + libro.getAutor() + libro.getDispobible());
         return libro;
       }
     }
-    System.out.println("No se hay conincidencias.");
     return null;
   }
 
-  public void prestarLibro(String isbn, int idUsuario) {
+  public void prestarLibro(String isbn, Usuario usuario) {
     Libro libro = buscarLibroIsbn(isbn);
-    libro.prestar();
-    Usuario.agregarPrestamo(isbn);
-    System.out.println("Libro Prestado");
+
+    if (isbn != null && libro.getDisponible()) {
+      libro.prestar();
+      usuario.agregarPrestamo(libro);
+      System.out.println("Libro Prestado al usuario " + usuario.getNombre() + ", " + usuario.getApellido());
+    } else {
+      System.out.println("No se puede encontrar el libro para prestar.");
+    }
+
   }
 
   public void devolverLibro(String isbn) {
@@ -47,7 +51,7 @@ public class Biblioteca {
     }
     for (Libro libro : catalogo) {
       System.out.println("Titulo: " + libro.getTitulo() + " | Autor: " + libro.getAutor() + " | " + "Disponible: "
-          + libro.getDispobible());
+          + libro.getDisponible());
     }
   }
 }
