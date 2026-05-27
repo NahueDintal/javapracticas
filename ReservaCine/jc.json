@@ -1,0 +1,10 @@
+{
+  "name": "ReservaCine",
+  "version": "1.0.0",
+  "mainClass": "Main",
+  "sourceDirectories": ["src"],
+  "testDirectories": [],
+  "dependencies": [],
+  "outputDirectory": "out/production/ReservaCine",
+  "javaVersion": 17
+}
