@@ -3,10 +3,9 @@ public class Sala {
   private int capacidad;
   private int butacasOcupadas = 0;
 
-  public Sala(int numeroSala, int capacidad, int butacasOcupadas) {
+  public Sala(int numeroSala, int capacidad) {
     this.numeroSala = numeroSala;
     this.capacidad = capacidad;
-    this.butacasOcupadas = butacasOcupadas;
   }
 
   public int getNumeroSala() {
@@ -35,7 +34,7 @@ public class Sala {
   }
 
   public void ocuparButacas(int cantidad) {
-    if (getButacasLibres() > cantidad) {
+    if (getButacasLibres() >= cantidad) {
       setButacasOcupadas(cantidad);
     }
   }

@@ -11,6 +11,22 @@ public class Funcion {
     this.fecha = fecha;
   }
 
+  public Pelicula getPelicula() {
+    return pelicula;
+  }
+
+  public String getTitulo() {
+    return pelicula.getTitulo();
+  }
+
+  public String getHorario() {
+    return horario;
+  }
+
+  public String getFecha() {
+    return fecha;
+  }
+
   public boolean reservarButacas(int cantidad) {
     if (sala.getButacasLibres() > cantidad) {
       sala.ocuparButacas(cantidad);
