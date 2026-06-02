@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <!-- Fuente principal -->
+    <classpathentry kind="src" path="src"/>
+    
+    <!-- Si tienes más fuentes (tests, etc.) agrégalas aquí -->
+    
+    <!-- JRE del sistema -->
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+    
+    <!-- Cada JAR dentro de lib/ (pon tantas líneas como necesites) -->
+    <classpathentry kind="lib" path="lib/algun-jar.jar"/>
+    <classpathentry kind="lib" path="lib/otro-jar.jar"/>
+    <!-- Si no hay JARs aún, no pongas ninguna línea lib -->
+    
+    <!-- Carpeta de salida (compilación) -->
+    <classpathentry kind="output" path="out/production/Hotel"/>
+</classpath>
