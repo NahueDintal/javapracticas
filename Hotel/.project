@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>Hotel</name>
-	<comment>Proyecto Hotel con estructura personal</comment>
+	<comment>Proyecto Java 17 generado por jc</comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1780368291826</id>
+			<id>1780525337803</id>
 			<name></name>
 			<type>30</type>
 			<matcher>

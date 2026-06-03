@@ -3,24 +3,25 @@ public class Reserva {
   private Habitacion habitacion;
   private String fechaInicio;
   private String fechaFin;
-  private int noches;
 
   public Reserva(Cliente cliente, Habitacion habitacion, String fechaInicio, String fechaFin) {
-    this.cliente = cliente;
-    this.habitacion = habitacion;
     this.fechaInicio = fechaInicio;
     this.fechaFin = fechaFin;
   }
 
-  public double calcularCostoTotal(int noches) {
-    double precio = habitacion.getPrecioPorNoche();
-    return precio * noches;
+  public Cliente getCliente() {
+    return cliente;
   }
 
   public Habitacion getHabitacion() {
     return habitacion;
   }
 
-  public void mostrarinfoReserva() {
+  public String getFechaInicio() {
+    return fechaInicio;
+  }
+
+  public String getFechaFin() {
+    return fechaFin;
   }
 }

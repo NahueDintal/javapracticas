@@ -1,9 +1,8 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Hotel {
-  private List<Habitacion> habitaciones;
-  private List<Reserva> reservas;
+  private ArrayList<Habitacion> habitaciones;
+  private ArrayList<Reserva> reservas;
 
   public Hotel() {
     this.habitaciones = new ArrayList<Habitacion>();
@@ -14,54 +13,43 @@ public class Hotel {
     habitaciones.add(h);
   }
 
-  public void agregarReserva(Reserva r) {
-    reservas.add(r);
-  }
-
-  public void removerReserva(Reserva r) {
-    reservas.remove(r);
-
-  }
-
-  public Habitacion buscarHabitacionDisponible(int capacidad) {
-    int buscarCapacidad = capacidad;
-    for (Habitacion habitacion : habitaciones) {
-      if (habitacion.getCapacidad() == buscarCapacidad) {
-        return habitacion;
+  // buscar habitacion
+  public Habitacion buscarHabitacionPorNumero(String tipo) {
+    String busqueda = tipo;
+    for (Habitacion hab : habitaciones) {
+      if (hab.getTipo().equals(busqueda)) {
+        return hab;
       }
     }
     return null;
   }
 
-  public Reserva buscarReserva(int numeroHabitacion) {
+  public void cancelarReserva() {
+
+  }
+
+  public Reserva hacerReserva(Cliente cliente, String tipoHabitacion, String fechaInicio, String fechaFin) {
+    Habitacion hab = buscarHabitacionPorNumero(tipoHabitacion);
+    Reserva reservas = reservas;
+
+    if (hab != null && Habitacion.getDisponible()) {
+      Habitacion.reservar();
+    }
+    reservas.add(Reserva);
+  }
+
+  public Reserva mostrarReservas() {
     for (Reserva reserva : reservas) {
-      if (reserva.getHabitacion().getNumero() == numeroHabitacion) {
+      if (reserva != null) {
+        System.out.print(reserva);
         return reserva;
       }
     }
     return null;
   }
 
-  public void cancelarReserva(int numeroHabitacion) {
-    Habitacion habitacion = buscarHabitacionDisponible(numeroHabitacion);
-    Reserva reserva = buscarReserva(numeroHabitacion);
+  public Habitaciones mostrarHabitaciones() {
+    for ()
 
-    habitacion.liberar();
-    removerReserva(reserva);
-  }
-
-  public boolean hacerReserva(Cliente cliente, int capacidad, String fechaInicio, String fechaFin) {
-    Habitacion habitacion = buscarHabitacionDisponible(capacidad);
-    Reserva reserva = new Reserva(cliente, habitacion, fechaInicio, fechaFin);
-
-    habitacion.reservar();
-    agregarReserva(reserva);
-    return true;
-  }
-
-  public void mostrarReservas() {
-    for (Reserva reserva : reservas) {
-      System.out.println(reserva);
-    }
   }
 }

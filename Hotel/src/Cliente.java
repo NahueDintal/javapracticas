@@ -1,15 +1,19 @@
 public class Cliente {
-  private int idCliente;
+  private String idCliente;
   private String nombre;
+  private String apellido;
   private String email;
+  private int telefono;
 
-  public Cliente(int idCliente, String nombre, String email) {
+  public Cliente(String idCliente, String nombre, String apellido, String email, int telefono) {
     this.idCliente = idCliente;
     this.nombre = nombre;
+    this.apellido = apellido;
     this.email = email;
+    this.telefono = telefono;
   }
 
-  public int getIdCliente() {
+  public String getIdCliente() {
     return idCliente;
   }
 
@@ -17,11 +21,16 @@ public class Cliente {
     return nombre;
   }
 
+  public String getApellido() {
+    return apellido;
+  }
+
   public String getEmail() {
     return email;
   }
 
-  public void mostrarInfo() {
-    System.out.println("Cliente info | Nombre: " + getNombre() + " | Email: " + getEmail());
+  public int getTeleno() {
+    return telefono;
   }
+
 }

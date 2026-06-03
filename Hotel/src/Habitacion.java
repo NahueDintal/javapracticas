@@ -1,21 +1,22 @@
 public class Habitacion {
   private int numero;
-  private int capacidad;
+  private String tipo;
   private double precioPorNoche;
-  private boolean disponible = true;
+  private boolean disponible;
 
-  public Habitacion(int numero, int capacidad, double precioPorNoche) {
+  public Habitacion(int numero, String tipo, double precioPorNoche, boolean disponible) {
     this.numero = numero;
-    this.capacidad = capacidad;
+    this.tipo = tipo;
     this.precioPorNoche = precioPorNoche;
+    this.disponible = disponible;
   }
 
   public int getNumero() {
     return numero;
   }
 
-  public int getCapacidad() {
-    return capacidad;
+  public String getTipo() {
+    return tipo;
   }
 
   public double getPrecioPorNoche() {
@@ -32,10 +33,5 @@ public class Habitacion {
 
   public void liberar() {
     this.disponible = true;
-  }
-
-  public void mostrarInfo() {
-    System.out.println("Numero habitación: " + getNumero() + " | Capacidad: " + getCapacidad() + " | Precio por noche: "
-        + getPrecioPorNoche());
   }
 }
