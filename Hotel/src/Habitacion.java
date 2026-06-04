@@ -1,37 +1,29 @@
 public class Habitacion {
-  private int numero;
-  private String tipo;
-  private double precioPorNoche;
-  private boolean disponible;
+  public int numero;
+  public String tipo; // "individual", "doble", "suite"
+  public double precioPorNoche;
+  public boolean disponible;
 
-  public Habitacion(int numero, String tipo, double precioPorNoche, boolean disponible) {
+  // Constructor sin validaciones
+  public Habitacion(int numero, String tipo, double precio) {
     this.numero = numero;
     this.tipo = tipo;
-    this.precioPorNoche = precioPorNoche;
-    this.disponible = disponible;
+    this.precioPorNoche = precio;
+    this.disponible = true;
   }
 
+  // Método que mezcla presentación con lógica (mala práctica)
+  public void mostrarInfo() {
+    System.out.println("Habitación " + numero + " tipo " + tipo + " precio " + precioPorNoche);
+  }
+
+  // Getter y setter inconsistentes
   public int getNumero() {
     return numero;
   }
 
-  public String getTipo() {
-    return tipo;
+  public void setNumero(int numero) {
+    this.numero = numero;
   }
-
-  public double getPrecioPorNoche() {
-    return precioPorNoche;
-  }
-
-  public boolean getDisponible() {
-    return disponible;
-  }
-
-  public void reservar() {
-    this.disponible = false;
-  }
-
-  public void liberar() {
-    this.disponible = true;
-  }
+  // faltan getters/setters para tipo, precio, disponible
 }

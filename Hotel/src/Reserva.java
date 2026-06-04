@@ -1,27 +1,25 @@
 public class Reserva {
-  private Cliente cliente;
-  private Habitacion habitacion;
-  private String fechaInicio;
-  private String fechaFin;
+  public Cliente cliente;
+  public Habitacion habitacion;
+  public String fechaInicio; // Formato "yyyy-MM-dd"
+  public String fechaFin;
+  public double costoTotal;
 
-  public Reserva(Cliente cliente, Habitacion habitacion, String fechaInicio, String fechaFin) {
-    this.fechaInicio = fechaInicio;
-    this.fechaFin = fechaFin;
+  // No calcula bien el costo total, no valida fechas ni disponibilidad
+  public Reserva(Cliente cliente, Habitacion habitacion, String inicio, String fin) {
+    this.cliente = cliente;
+    this.habitacion = habitacion;
+    this.fechaInicio = inicio;
+    this.fechaFin = fin;
+    // Error: calcula costo como precio por noche * número de días (pero días mal
+    // calculados)
+    int dias = Integer.parseInt(fin.split("-")[2]) - Integer.parseInt(inicio.split("-")[2]);
+    this.costoTotal = dias * habitacion.precioPorNoche;
+    // No marca la habitación como no disponible
   }
 
-  public Cliente getCliente() {
-    return cliente;
-  }
-
-  public Habitacion getHabitacion() {
-    return habitacion;
-  }
-
-  public String getFechaInicio() {
-    return fechaInicio;
-  }
-
-  public String getFechaFin() {
-    return fechaFin;
+  public void mostrarReserva() {
+    System.out.println("Reserva de " + cliente.nombre + " en hab " + habitacion.numero +
+        " desde " + fechaInicio + " hasta " + fechaFin + " total: " + costoTotal);
   }
 }

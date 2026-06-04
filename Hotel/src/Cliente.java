@@ -1,36 +1,21 @@
 public class Cliente {
-  private String idCliente;
-  private String nombre;
-  private String apellido;
-  private String email;
-  private int telefono;
+  public String id;
+  public String nombre;
+  public String email;
 
-  public Cliente(String idCliente, String nombre, String apellido, String email, int telefono) {
-    this.idCliente = idCliente;
+  // Constructor público sin validación
+  public Cliente(String id, String nombre, String email) {
+    this.id = id;
     this.nombre = nombre;
-    this.apellido = apellido;
     this.email = email;
-    this.telefono = telefono;
   }
 
-  public String getIdCliente() {
-    return idCliente;
+  // Mala práctica: cambiar el ID después de creado
+  public void cambiarId(String nuevoId) {
+    this.id = nuevoId;
   }
 
-  public String getNombre() {
-    return nombre;
+  public void mostrarInfo() {
+    System.out.println("Cliente: " + nombre + " (" + id + ") - " + email);
   }
-
-  public String getApellido() {
-    return apellido;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public int getTeleno() {
-    return telefono;
-  }
-
 }
