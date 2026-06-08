@@ -1,25 +1,44 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Reserva {
-  public Cliente cliente;
-  public Habitacion habitacion;
-  public String fechaInicio; // Formato "yyyy-MM-dd"
-  public String fechaFin;
-  public double costoTotal;
+  private Cliente cliente;
+  private Habitacion habitacion;
+  private LocalDate fechaInicio;
+  private LocalDate fechaFin;
+  private double costoTotal;
 
   // No calcula bien el costo total, no valida fechas ni disponibilidad
-  public Reserva(Cliente cliente, Habitacion habitacion, String inicio, String fin) {
+  public Reserva(Cliente cliente, Habitacion habitacion, LocalDate inicio, LocalDate fin) {
     this.cliente = cliente;
     this.habitacion = habitacion;
-    this.fechaInicio = inicio;
-    this.fechaFin = fin;
+    this.fechaInicio = fechaInicio;
+    this.fechaFin = fechaFin;
+    if (fechaInicio.isAfter(fechaFin) || fechaInicio.isEqual(fechaFin)) {
+      throw new IllegalArgumentException("La fecha de inicio debe ser anterior a la fecha de fin.");
+    }
     // Error: calcula costo como precio por noche * número de días (pero días mal
     // calculados)
-    int dias = Integer.parseInt(fin.split("-")[2]) - Integer.parseInt(inicio.split("-")[2]);
-    this.costoTotal = dias * habitacion.precioPorNoche;
-    // No marca la habitación como no disponible
+    long dias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
+    double precioPorNoche = habitacion.getPrecioPorNoche();
+    this.costoTotal = dias * precioPorNoche;
+  }
+
+  public LocalDate getFechaInicio() {
+    return fechaInicio;
+  }
+
+  public LocalDate getFechaFin() {
+    return fechaFin;
+  }
+
+  public double getCostoTotal() {
+    return costoTotal;
   }
 
   public void mostrarReserva() {
-    System.out.println("Reserva de " + cliente.nombre + " en hab " + habitacion.numero +
-        " desde " + fechaInicio + " hasta " + fechaFin + " total: " + costoTotal);
+    System.out.println("Reserva de " + cliente.getNombre() + " en hab " + habitacion.getNumero() +
+        " desde " + fechaInicio + " hasta " + fechaFin + " total: " + getCostoTotal());
   }
 }

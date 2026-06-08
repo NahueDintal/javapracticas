@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Hotel {
   public ArrayList<Habitacion> habitaciones;
@@ -17,20 +18,37 @@ public class Hotel {
   // fechas
   public Habitacion buscarHabitacionDisponible(String tipo) {
     for (Habitacion h : habitaciones) {
-      if (h.tipo.equals(tipo) && h.disponible) {
+      if (h.getTipo().equals(tipo) && h.getDisponible()) {
         return h;
       }
     }
     return null;
   }
 
-  // Hacer reserva sin validar fechas, sin verificar disponibilidad real
-  public void hacerReserva(Cliente cliente, String tipoHabitacion, String inicio, String fin) {
-    Habitacion hab = buscarHabitacionDisponible(tipoHabitacion);
+  public Habitacion buscarHabitacionDisponible(String tipo, LocalDate inicio, LocalDate fin) {
+    for (Habitacion h : habitaciones) {
+      if (h.getTipo().equals(tipo) && h.getDisponible()) {
+        boolean disponible = false;
+        for (Reserva r : reservas) {
+          if (inicio.isBefore(r.getFechaFin()) && fin.isAfter(r.getFechaInicio())) {
+            disponible = true;
+            break;
+          }
+        }
+        if (!disponible) {
+          return h;
+        }
+      }
+    }
+    return null;
+  }
+
+  public void hacerReserva(Cliente cliente, String tipoHabitacion, LocalDate inicio, LocalDate fin) {
+    Habitacion hab = buscarHabitacionDisponible(tipoHabitacion, inicio, fin);
     if (hab != null) {
       Reserva r = new Reserva(cliente, hab, inicio, fin);
       reservas.add(r);
-      hab.disponible = false;
+      hab.getDisponible();
       System.out.println("Reserva creada exitosamente.");
     } else {
       System.out.println("No hay habitaciones disponibles.");
@@ -41,8 +59,7 @@ public class Hotel {
   public void cancelarReserva(int indice) {
     if (indice >= 0 && indice < reservas.size()) {
       Reserva r = reservas.get(indice);
-      // No libera la habitación
-      reservas.remove(indice);
+      reservas.remove(r);
       System.out.println("Reserva cancelada.");
     } else {
       System.out.println("Índice inválido.");
