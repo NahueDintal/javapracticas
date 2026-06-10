@@ -11,15 +11,15 @@ public class Reserva {
 
   // No calcula bien el costo total, no valida fechas ni disponibilidad
   public Reserva(Cliente cliente, Habitacion habitacion, LocalDate inicio, LocalDate fin) {
-    this.cliente = cliente;
+    if (cliente != null) {
+      this.cliente = cliente;
+    }
     this.habitacion = habitacion;
-    this.fechaInicio = fechaInicio;
-    this.fechaFin = fechaFin;
-    if (fechaInicio.isAfter(fechaFin) || fechaInicio.isEqual(fechaFin)) {
+    this.fechaInicio = inicio;
+    this.fechaFin = fin;
+    if (inicio.isAfter(fin) || inicio.isEqual(fin)) {
       throw new IllegalArgumentException("La fecha de inicio debe ser anterior a la fecha de fin.");
     }
-    // Error: calcula costo como precio por noche * número de días (pero días mal
-    // calculados)
     long dias = ChronoUnit.DAYS.between(fechaInicio, fechaFin);
     double precioPorNoche = habitacion.getPrecioPorNoche();
     this.costoTotal = dias * precioPorNoche;

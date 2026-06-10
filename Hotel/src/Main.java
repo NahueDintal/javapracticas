@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.util.Scanner;
-import java.time.temporal.ChronoUnit;
 
 public class Main {
   public static void main(String[] args) {
@@ -44,18 +43,24 @@ public class Main {
           System.out.print("Tipo habitación (individual/doble/suite): ");
           String tipo = sc.nextLine();
 
-          // System.out.print("Fecha inicio (YYYY-MM-DD): ");
-          // String inicio = sc.nextLine();
-          // System.out.print("Fecha fin (YYYY-MM-DD): ");
-          // String fin = sc.nextLine();
+          LocalDate inicio = null;
+          LocalDate fin = null;
 
           System.out.print("Fecha inicio (YYYY-MM-DD): ");
           String inicioStr = sc.nextLine();
+          try {
+            inicio = LocalDate.parse(inicioStr);
+          } catch (Exception e) {
+            System.out.println("Formato de fecha no válido: YYYY-MM-DD.");
+          }
           System.out.print("Fecha fin (YYYY-MM-DD): ");
           String finStr = sc.nextLine();
-          LocalDate inicio = LocalDate.parse(inicioStr);
-          LocalDate fin = LocalDate.parse(finStr);
-          // Luego llama al método de reserva con estos LocalDate
+          try {
+            fin = LocalDate.parse(finStr);
+          } catch (Exception e) {
+            System.out.println("Formato de fecha no válido: YYYY-MM-DD.");
+          }
+
           hotel.hacerReserva(c, tipo, inicio, fin);
           break;
         case 3:
