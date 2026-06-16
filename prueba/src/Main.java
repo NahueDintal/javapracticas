@@ -1,11 +1,4 @@
-public class Main {
-  public static void main(String[] args) {
-    System.out.println("¡Hola Wachin! Desde 'prueba' con Java 17!");
-
-    int i = 0;
-    while (i <= 3) {
-      i += 1;
-      System.out.println(i);
-    }
-  }
-}
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
