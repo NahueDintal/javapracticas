@@ -2,9 +2,9 @@ import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
 
 public class Reserva {
-  public int id;
-  public LocalDate fechaEntrada;
-  public LocalDate fechaSalida;
+  private int id;
+  private LocalDate fechaEntrada;
+  private LocalDate fechaSalida;
   Cliente cliente;
   Habitacion habitacion;
 

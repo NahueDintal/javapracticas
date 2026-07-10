@@ -1,7 +1,8 @@
 public class HabitacionSimple extends Habitacion {
   private boolean tieneBalcon;
 
-  public HabitacionSimple(boolean tieneBalcon) {
+  public HabitacionSimple(int id, double precioBase, boolean tieneBalcon) {
+    super(id, precioBase);
     this.tieneBalcon = tieneBalcon;
   }
 
@@ -9,7 +10,7 @@ public class HabitacionSimple extends Habitacion {
     return tieneBalcon;
   }
 
-  public double calcularPrecio(int noches) {
+  public double calcularPrecio(long noches) {
     return (double) (getPrecioBase() * noches) + 50;
   }
 }
