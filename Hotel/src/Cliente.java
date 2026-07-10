@@ -21,9 +21,11 @@ public class Cliente {
     return esFrecuente;
   }
 
-  public void aplicarDescuento(boolean esFrecuente) {
-    if (esFrecuente != true) {
-      // return precio * 0.10;
+  public double aplicarDescuento(double subTotal) {
+    if (getEsFrecuente()) {
+      subTotal = subTotal - (subTotal * 0.1);
     }
+
+    return subTotal;
   }
 }

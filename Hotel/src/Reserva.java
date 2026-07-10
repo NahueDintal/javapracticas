@@ -1,3 +1,4 @@
+import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
 
 public class Reserva {
@@ -27,7 +28,10 @@ public class Reserva {
     return fechaSalida;
   }
 
-  public double getCalcularTotal() {
-    return habitacion.calcularPrecio() + cliente.aplicarDescuento();
+  public double calcularTotal() {
+    long noches = ChronoUnit.DAYS.between(this.fechaEntrada, this.fechaSalida);
+    double precioBaseTotal = this.habitacion.calcularPrecio(noches);
+    double precioFinal = this.cliente.aplicarDescuento(precioBaseTotal);
+    return precioFinal;
   }
 }
