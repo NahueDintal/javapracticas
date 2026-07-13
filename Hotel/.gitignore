@@ -2,3 +2,4 @@ out/
 .idea/
 *.iml
 dist/
+src/config.properties
