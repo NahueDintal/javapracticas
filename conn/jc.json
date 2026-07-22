@@ -1,0 +1,10 @@
+{
+  "name": "conn",
+  "version": "1.0.0",
+  "mainClass": "Main",
+  "sourceDirectories": ["src"],
+  "testDirectories": [],
+  "dependencies": ["/usr/share/java/mariadb-jdbc/mariadb-java-client-3.5.7.jar"],
+  "outputDirectory": "out/production/conn",
+  "javaVersion": 17
+}
