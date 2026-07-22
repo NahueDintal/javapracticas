@@ -28,6 +28,10 @@ public class Reserva {
     return fechaSalida;
   }
 
+  public Cliente getCliente() {
+    return cliente;
+  }
+
   public double calcularTotal() {
     long noches = ChronoUnit.DAYS.between(this.fechaEntrada, this.fechaSalida);
     double precioBaseTotal = this.habitacion.calcularPrecio(noches);
