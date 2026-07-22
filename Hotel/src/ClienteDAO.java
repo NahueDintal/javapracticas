@@ -34,15 +34,15 @@ public class ClienteDAO {
   public void insertar(Cliente cliente) throws SQLException {
     String sql = "INSERT INTO cliente (nombre, es_frecuente) VALUES (?, ?)";
     try (Connection conn = ConexionDB.getConnection();
-         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
       pstmt.setString(1, cliente.getNombre());
       pstmt.setBoolean(2, cliente.getEsFrecuente());
       int afectadas = pstmt.executeUpdate();
       if (afectadas == 0) {
-        throws new SQLException("No se pudo insertad cliente.");
+        throw new SQLException("No se pudo insertad cliente.");
       }
       try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-        if(generatedKeys.next()) {
+        if (generatedKeys.next()) {
           cliente.setId(generatedKeys.getInt(1));
         }
       }
@@ -51,6 +51,12 @@ public class ClienteDAO {
 
   public void actualizar(Cliente cliente) throws SQLException {
     String sql = "UPDATE cliente SET nombre = ?, es_frecuente = ? WHERE id = ?";
-    try ()
+    try (Connection conn = ConexionDB.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+      pstmt.setString(1, cliente.getNombre());
+      pstmt.setBoolean(2, cliente.getEsFrecuente());
+      pstmt.setInt(3, cliente.getId());
+      pstmt.executeUpdate();
+    }
   }
-}
+
+} // fin de clase;

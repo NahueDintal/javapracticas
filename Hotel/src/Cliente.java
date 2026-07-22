@@ -21,6 +21,10 @@ public class Cliente {
     return esFrecuente;
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
+
   public double aplicarDescuento(double subTotal) {
     if (getEsFrecuente()) {
       subTotal = subTotal - (subTotal * 0.1);
