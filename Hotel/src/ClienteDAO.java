@@ -59,4 +59,19 @@ public class ClienteDAO {
     }
   }
 
+  public void eliminar(int id) throws SQLException {
+    String sql = "DETELE FROM cliente WHERE id = ?";
+    try (Connection conn = ConexionDB.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+      pstmt.setInt(1, id);
+      pstmt.executeUpdate();
+    }
+  }
+
+  private Cliente mapearCliente(ResultSet rs) throws SQLException {
+    int id = rs.getInt("id");
+    String nombre = rs.getString("nombre");
+    boolean esFrecuente = rs.getBoolean("es_frecuente");
+    return new Cliente(id, nombre, esFrecuente);
+  }
+
 } // fin de clase;
