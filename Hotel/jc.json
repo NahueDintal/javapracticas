@@ -4,7 +4,7 @@
   "mainClass": "Main",
   "sourceDirectories": ["src"],
   "testDirectories": [],
-  "dependencies": [],
+  "dependencies": ["/usr/share/java/mariadb-jdbc/mariadb-java-client-3.5.7.jar"],
   "outputDirectory": "out/production/Hotel",
   "javaVersion": 17
 }
