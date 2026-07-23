@@ -19,7 +19,7 @@ public class ClienteDAO {
   }
 
   public List<Cliente> listarTodos() throws SQLException {
-    List<Clientes> clientes = new ArrayList<>();
+    List<Cliente> clientes = new ArrayList<>();
     String sql = "SELECT id, nombre, es_frecuente FROM cliente";
     try (Connection conn = ConexionDB.getConnection();
         Statement stmt = conn.createStatement();

@@ -16,6 +16,10 @@ public class Reserva {
     this.habitacion = habitacion;
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
+
   public int getId() {
     return id;
   }
@@ -30,6 +34,10 @@ public class Reserva {
 
   public Cliente getCliente() {
     return cliente;
+  }
+
+  public Habitacion getHabitacion() {
+    return habitacion;
   }
 
   public double calcularTotal() {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class HabitacionDAO {
 
-  public Habitacion obtenerPorID(int id) throws SQLException {
+  public Habitacion obtenerPorId(int id) throws SQLException {
     String sql = "SELECT id, precio_base, tipo, tiene_balcon, tiene_jacuzzi FROM habitacion WHERE id = ?";
     try (Connection conn = ConexionDB.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
       pstmt.setInt(1, id);

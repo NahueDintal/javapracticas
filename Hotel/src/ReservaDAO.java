@@ -85,8 +85,6 @@ public class ReservaDAO {
     }
   }
 
-  // Mapeo: construye la Reserva y carga los objetos Cliente y Habitacion usando
-  // los DAOs
   private Reserva mapearReserva(ResultSet rs) throws SQLException {
     int id = rs.getInt("id");
     LocalDate fechaEntrada = rs.getDate("fecha_entrada").toLocalDate();
@@ -94,7 +92,6 @@ public class ReservaDAO {
     int clienteId = rs.getInt("cliente_id");
     int habitacionId = rs.getInt("habitacion_id");
 
-    // Cargar el cliente y la habitación completos
     Cliente cliente = clienteDAO.obtenerPorId(clienteId);
     Habitacion habitacion = habitacionDAO.obtenerPorId(habitacionId);
 

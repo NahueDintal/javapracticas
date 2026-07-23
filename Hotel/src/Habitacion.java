@@ -18,4 +18,8 @@ public class Habitacion {
   public double calcularPrecio(long noches) {
     return precioBase * noches;
   }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 }
