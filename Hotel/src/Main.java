@@ -11,7 +11,7 @@ public class Main {
       clienteDAO.insertar(cliente); // Se asigna el ID automático
       System.out.println("Cliente insertado con ID: " + cliente.getId());
 
-      HabitacionSimple hab = new HabitacionSimple(0, 120.0, true);
+      HabitacionSimple hab = new HabitacionSimple(123, 120.0, true);
       habitacionDAO.insertar(hab);
       System.out.println("Habitación insertada con ID: " + hab.getId());
 
