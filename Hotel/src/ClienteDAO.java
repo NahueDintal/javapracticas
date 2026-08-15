@@ -12,7 +12,6 @@ public class ClienteDAO {
         if (rs.next()) {
           return mapearCliente(rs);
         }
-
       }
     }
     return null;
